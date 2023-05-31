@@ -1,11 +1,13 @@
 export const Navbar = () => {
   return (
     <nav>
-      {/* <ul>
+      <ul>
         <li>Movie</li>
         <li>TV</li>
-      </ul> */}
-      <input type="text" placeholder="Search" className="search" />
+      </ul>
+      <form>
+        <input type="text" placeholder="Search" className="search" />
+      </form>
     </nav>
   );
 };

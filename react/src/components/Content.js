@@ -1,33 +1,41 @@
-// import { useTMDB } from "../useTMDB";
 import Axios from "axios";
 import { InfoCard } from "./InfoCard";
 import { Pagenation } from "./Pagenation";
 
-import { useEffect, useState } from "react";
-
-// const API_KEY = "api_key=e09e73373fe71e5e88a2defeacfd7210";
-// const BASE_URL = "https://api.themoviedb.org/3";
-// const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
-// const SEARCH_URL = BASE_URL + "/search/movie?" + API_KEY;
-// const IMG_URL = "https://image.tmdb.org/t/p/w500";
+import { useLayoutEffect, useState } from "react";
 
 export const Content = () => {
-  const [movieList, setMovieList] = useState({});
+  const [movieList, setMovieList] = useState([]);
 
-  useEffect(() => {
-    setMovieList(() => {
-      return Axios.get("http://127.0.0.1:5000/api/get_movies").then(
-        (res) => res.data
-      );
+  const getMovies = async () => {
+    await Axios.get("http://127.0.0.1:5000/api/get_movies").then((res) => {
+      setMovieList(res.data.results);
     });
+  };
+
+  useLayoutEffect(() => {
+    setMovieList(getMovies());
   }, []);
 
   return (
     <main className="main-content">
       <section className="genre"></section>
-      <InfoCard />
-      {movieList.forEach((movie) => movie.title)}
-      {/* {movieList.title} */}
+      <section className="info-card">
+        {movieList.length > 0 &&
+          movieList.map((movie) => {
+            return (
+              <InfoCard
+                className="card"
+                key={movie.id}
+                poster_path={movie.poster_path}
+                overview={movie.overview}
+                title={movie.title}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+              />
+            );
+          })}
+      </section>
       <Pagenation />
     </main>
   );

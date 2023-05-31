@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Content } from "./components/Content";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
@@ -9,9 +9,15 @@ export const App = () => {
   return (
     <QueryClientProvider client={client}>
       <div className="App">
-        <Navbar />
-        <Content />
-        <Footer />
+        <header>
+          <Navbar className="navbar" />
+        </header>
+        <main>
+          <Content />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </QueryClientProvider>
   );
