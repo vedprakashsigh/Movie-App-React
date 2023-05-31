@@ -11,14 +11,18 @@ export const InfoCard = ({
   return (
     <div className="card">
       <img
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png"
+        }
         alt={title}
         width={300}
         height={450}
       />
       <div className="text">
         <span style={{ color: col }} className="vote">
-          {vote_average}
+          {vote_average.toFixed(1)} {/* int to float conversion */}
         </span>
         <h3>{title}</h3>
         <p className="content">{overview}</p>

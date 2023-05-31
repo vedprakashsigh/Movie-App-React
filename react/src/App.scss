@@ -6,8 +6,6 @@
 
 .App {
   background: #006811;
-  // text-align: center;
-  height: 100%;
   
   nav {
     background-color: #507a4e;
@@ -21,20 +19,50 @@
       display: flex;
       width: 10%;
       justify-content: space-around;
+      align-self: center;
 
       li{
         list-style: none;
+        cursor: pointer;
+        color: wheat;
       }
     }
 
     .search{
       border-radius: 20px;
-      border: 1px solid #006811;
+      border: 2px solid #006811;
       background: transparent;
-      color: white;
+      color: wheat;
       height: 30px;
       padding: 10px;
-      
+      outline: none;
+      position: absolute;
+      right: 80px;
+     
+      &::placeholder{
+        color: wheat;
+      }
+
+      &:focus{
+        border: 2px solid #507a4e;
+        background: #006811;
+      }
+    }
+
+    .btn{
+      margin-left: 10px;
+      background: #006811;
+      border: 2px solid #507a4e;
+      border-radius: 10px;
+      height: 30px;
+      width: 60px;
+      color: wheat;
+    
+      &:hover{        
+      background: #507a4e;
+      border: 2px solid #006811;
+      cursor: pointer;
+      }
     }
   }
 
@@ -42,16 +70,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
+    
     .card{
+      height: 450px;
       width: 300px;
       margin: 10px;
-      background: #507a4e;
-    }
+      overflow: hidden;
 
+      &:hover{
+        .text{
+          transform: translateY(calc(-100%));
+        }
+      }
+    }
+    
     .text{
       display: flex;
       flex-direction: column;
+      background: #507a4e;
+      transform: translateY(0px);
+      padding: 5px;
+
       h3{
         color: wheat;
         padding: 10px;
@@ -59,30 +98,24 @@
       }
 
       p{
-      //  opacity: 0;
        padding: 5px;
       }
-
-      // p:hover{
-      //   opacity: 1;
-      // }
 
       .vote{
         font-weight: 700;
         background: #006811;
-        position: inherit;
-        right: 0;
-        left: 0;
-
-        // top: 15px;
-        // padding: 10px;
-        // left: calc(85%);
+        position: absolute;
+        align-self: flex-end;
+        align-content: center;
+        margin: 10px 15px 0  0;
+        padding: 5px;
+        width: 30px;
       }
 
       .release-date{
         color: wheat;
-        // display: flex;
-        // justify-content: flex-end;
+        display: inherit;
+        justify-content: flex-end;
       }
     }
   }
