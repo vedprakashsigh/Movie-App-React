@@ -1,16 +1,28 @@
-import { useEffect } from "react";
-import { getMovies, getTVShows } from "../logic";
+import { useEffect, useState } from "react";
+import {
+  getMovies,
+  getMoviesGenre,
+  getTVShows,
+  getTVShowsGenre,
+} from "../logic";
 import { InfoCard } from "./InfoCard";
 import { Pagenation } from "./Pagenation";
+import { Genre } from "./Genre";
 
 export const Content = ({ flag, moviesShows, setMoviesShows }) => {
+  const [genre, setGenre] = useState([]);
+
   useEffect(() => {
     flag === 1 ? getMovies(setMoviesShows) : getTVShows(setMoviesShows);
   }, [flag, setMoviesShows]);
 
+  useEffect(() => {
+    flag === 1 ? getMoviesGenre(setGenre) : getTVShowsGenre(setGenre);
+  }, [flag, setGenre]);
+
   return (
     <main className="main-content">
-      <section className="genre"></section>
+      <Genre genre={genre} />
       <section className="info-card">
         {moviesShows.length > 0 ? (
           moviesShows.map((movieShow) => {
