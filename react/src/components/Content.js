@@ -22,7 +22,7 @@ export const Content = ({ flag, moviesShows, setMoviesShows }) => {
 
   return (
     <main className="main-content">
-      <Genre genre={genre} />
+      <Genre genre={genre} flag={flag} setMoviesShows={setMoviesShows} />
       <section className="info-card">
         {moviesShows.length > 0 ? (
           moviesShows.map((movieShow) => {

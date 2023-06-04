@@ -14,6 +14,8 @@ MOVIE_SEARCH_URL = os.getenv("MOVIE_SEARCH_URL")
 TV_SEARCH_URL = os.getenv("TV_SEARCH_URL")
 MOVIE_GENRE_URL = os.getenv("MOVIE_GENRE_URL")
 TV_GENRE_URL = os.getenv("TV_GENRE_URL")
+MOVIE_GENRE_SEARCH_URL = os.getenv("MOVIE_GENRE_SEARCH_URL")
+TV_GENRE_SEARCH_URL = os.getenv("TV_GENRE_SEARCH_URL")
 
 
 @app.route("/api/get_movies")
@@ -54,9 +56,7 @@ def get_tv_search(query):
 
 @app.route("/api/movie_genre_search/<query>")
 def get_movie_genre_search(query):
-    queries = query.split()
-    query = ",".join(queries)
-    response = urllib.request.urlopen(MOVIE_SEARCH_URL + query)
+    response = urllib.request.urlopen(MOVIE_GENRE_SEARCH_URL + query)
     data = response.read()
     movie_list = json.loads(data)
     return movie_list
@@ -64,9 +64,7 @@ def get_movie_genre_search(query):
 
 @app.route("/api/tv_genre_search/<query>")
 def get_tv_genre_search(query):
-    queries = query.split()
-    query = ",".join(queries)
-    response = urllib.request.urlopen(TV_SEARCH_URL + query)
+    response = urllib.request.urlopen(TV_GENRE_SEARCH_URL + query)
     data = response.read()
     tv_show_list = json.loads(data)
     return tv_show_list

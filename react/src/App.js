@@ -27,7 +27,6 @@ export const App = () => {
             moviesShows={moviesShows}
             setMoviesShows={setMoviesShows}
           />
-          {/* {console.log(moviesShows)} */}
         </main>
         <footer>
           <Footer />
