@@ -8,14 +8,21 @@ import os
 load_dotenv()
 app = Flask(__name__)
 cors = CORS(app)
-MOVIE_URL = os.getenv("MOVIE_URL")
-TV_URL = os.getenv("TV_URL")
-MOVIE_SEARCH_URL = os.getenv("MOVIE_SEARCH_URL")
-TV_SEARCH_URL = os.getenv("TV_SEARCH_URL")
-MOVIE_GENRE_URL = os.getenv("MOVIE_GENRE_URL")
-TV_GENRE_URL = os.getenv("TV_GENRE_URL")
-MOVIE_GENRE_SEARCH_URL = os.getenv("MOVIE_GENRE_SEARCH_URL")
-TV_GENRE_SEARCH_URL = os.getenv("TV_GENRE_SEARCH_URL")
+API_KEY = os.getenv("API_KEY")
+
+MOVIE_URL = f"https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key={API_KEY}"
+TV_URL = f"https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key={API_KEY}"
+MOVIE_GENRE_URL = (
+    f"https://api.themoviedb.org/3/genre/movie/list?language=en&api_key={API_KEY}"
+)
+TV_GENRE_URL = (
+    f"https://api.themoviedb.org/3/genre/tv/list?language=en&api_key={API_KEY}"
+)
+MOVIE_SEARCH_URL = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query="
+TV_SEARCH_URL = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query="
+MOVIE_GENRE_SEARCH_URL = f"https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key={API_KEY}&with_genres="
+TV_GENRE_SEARCH_URL = f"https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key={API_KEY}&with_genres="
+IMG_URL = "https://image.tmdb.org/t/p/w500"
 
 
 @app.route("/api/get_movies/<int:pgno>")
