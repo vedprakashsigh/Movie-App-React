@@ -16,39 +16,41 @@ export const Navbar = ({
         <li onClick={() => setFlag(1)}>Movie</li>
         <li onClick={() => setFlag(0)}>TV</li>
       </ul>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          flag === 1
-            ? search_movies(query, setMoviesShows, setLastUrl, lastUrl)
-            : search_tv(query, setMoviesShows, setLastUrl, lastUrl);
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Search"
-          className="search"
-          onChange={(e) => {
+      <div className="form">
+        <form
+          onSubmit={(e) => {
             e.preventDefault();
-
-            setQuery(e.target.value);
             flag === 1
               ? search_movies(query, setMoviesShows, setLastUrl, lastUrl)
               : search_tv(query, setMoviesShows, setLastUrl, lastUrl);
           }}
-        />
-      </form>
-      <button
-        className="btn"
-        onClick={(e) => {
-          e.preventDefault();
-          flag === 1
-            ? search_movies(query, setMoviesShows, setLastUrl, lastUrl)
-            : search_tv(query, setMoviesShows, setLastUrl, lastUrl);
-        }}
-      >
-        Search
-      </button>
+        >
+          <input
+            type="text"
+            placeholder="Search"
+            className="search"
+            onChange={(e) => {
+              e.preventDefault();
+
+              setQuery(e.target.value);
+              flag === 1
+                ? search_movies(query, setMoviesShows, setLastUrl, lastUrl)
+                : search_tv(query, setMoviesShows, setLastUrl, lastUrl);
+            }}
+          />
+        </form>
+        <button
+          className="btn"
+          onClick={(e) => {
+            e.preventDefault();
+            flag === 1
+              ? search_movies(query, setMoviesShows, setLastUrl, lastUrl)
+              : search_tv(query, setMoviesShows, setLastUrl, lastUrl);
+          }}
+        >
+          Search
+        </button>
+      </div>
     </nav>
   );
 };

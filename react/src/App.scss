@@ -26,6 +26,8 @@
         cursor: pointer;
         color: wheat;
         margin: 10px;
+        position: relative;
+        left: 20px;
       }
     }
 
@@ -38,7 +40,8 @@
       padding: 10px;
       outline: none;
       position: absolute;
-      right: 80px;
+      right: 100px;
+      top: 20px;
      
       &::placeholder{
         color: wheat;
@@ -51,12 +54,12 @@
     }
 
     .btn{
-      margin-left: 10px;
+      margin: 10px;
       background: #006811;
       border: 2px solid #507a4e;
       border-radius: 10px;
       height: 30px;
-      width: 60px;
+      width: 80px;
       color: wheat;
     
       &:hover{        
@@ -186,5 +189,35 @@
     justify-content: center;
     color: whitesmoke;
     padding: 10px;
+  }
+}
+
+@media screen and (max-width: 400px)
+{
+  .App nav {
+    display: block;
+
+    ul {
+      display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    }
+
+    .search{
+      right: 0;
+      margin-right: 10px;
+      top: 60px;
+    }
+
+    .btn{
+      position: relative;
+      top: 2px;
+    }
+
+    .form {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 }
