@@ -99,4 +99,4 @@ def get_tv_genres():
 
 if __name__ == "__main__":
     app.secret_key = os.getenv("SECRET_KEY")
-    app.run(debug=True)
+    app.run(debug=False, port="0.0.0.0")
