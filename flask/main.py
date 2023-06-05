@@ -18,53 +18,57 @@ MOVIE_GENRE_SEARCH_URL = os.getenv("MOVIE_GENRE_SEARCH_URL")
 TV_GENRE_SEARCH_URL = os.getenv("TV_GENRE_SEARCH_URL")
 
 
-@app.route("/api/get_movies")
-def get_movies():
-    response = urllib.request.urlopen(MOVIE_URL)
+@app.route("/api/get_movies/<int:pgno>")
+def get_movies(pgno):
+    response = urllib.request.urlopen(MOVIE_URL + "&page=" + str(pgno))
     data = response.read()
     movie_list = json.loads(data)
     return movie_list
 
 
-@app.route("/api/get_tv_shows")
-def get_tv_shows():
-    response = urllib.request.urlopen(TV_URL)
+@app.route("/api/get_tv_shows/<pgno>")
+def get_tv_shows(pgno):
+    response = urllib.request.urlopen(TV_URL + "&page=" + str(pgno))
     data = response.read()
     tv_show_list = json.loads(data)
     return tv_show_list
 
 
-@app.route("/api/movie_search/<query>")
-def get_movie_search(query):
+@app.route("/api/movie_search/<query>/<pgno>")
+def get_movie_search(query, pgno):
     queries = query.split()
     query = "+".join(queries)
-    response = urllib.request.urlopen(MOVIE_SEARCH_URL + query)
+    response = urllib.request.urlopen(MOVIE_SEARCH_URL + query + "&page=" + str(pgno))
     data = response.read()
     movie_list = json.loads(data)
     return movie_list
 
 
-@app.route("/api/tv_search/<query>")
-def get_tv_search(query):
+@app.route("/api/tv_search/<query>/<pgno>")
+def get_tv_search(query, pgno):
     queries = query.split()
     query = "+".join(queries)
-    response = urllib.request.urlopen(TV_SEARCH_URL + query)
+    response = urllib.request.urlopen(TV_SEARCH_URL + query + "&page=" + str(pgno))
     data = response.read()
     tv_show_list = json.loads(data)
     return tv_show_list
 
 
-@app.route("/api/movie_genre_search/<query>")
-def get_movie_genre_search(query):
-    response = urllib.request.urlopen(MOVIE_GENRE_SEARCH_URL + query)
+@app.route("/api/movie_genre_search/<query>/<pgno>")
+def get_movie_genre_search(query, pgno):
+    response = urllib.request.urlopen(
+        MOVIE_GENRE_SEARCH_URL + query + "&page=" + str(pgno)
+    )
     data = response.read()
     movie_list = json.loads(data)
     return movie_list
 
 
-@app.route("/api/tv_genre_search/<query>")
-def get_tv_genre_search(query):
-    response = urllib.request.urlopen(TV_GENRE_SEARCH_URL + query)
+@app.route("/api/tv_genre_search/<query>/<pgno>")
+def get_tv_genre_search(query, pgno):
+    response = urllib.request.urlopen(
+        TV_GENRE_SEARCH_URL + query + "&page=" + str(pgno)
+    )
     data = response.read()
     tv_show_list = json.loads(data)
     return tv_show_list

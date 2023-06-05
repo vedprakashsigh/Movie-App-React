@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
-import {
-  getMovies,
-  getTVShows,
-  search_movies_genre,
-  search_tv_genre,
-} from "../logic";
+import { search_movies_genre, search_tv_genre } from "../logic";
 
-export const Genre = ({ flag, genre, setMoviesShows }) => {
+export const Genre = ({ flag, genre, setMoviesShows, setLastUrl, lastUrl }) => {
+  const f = () => {
+    let initialColorFlag = {};
+    initialColorFlag =
+      genre?.length > 0 &&
+      genre.map((g) => {
+        return { ...initialColorFlag, [g.id]: false };
+      });
+    return initialColorFlag;
+  };
+
   const [genreId, setGenreId] = useState("");
-  const [colorFlag, setColorFlag] = useState(false);
-  const [col, setCol] = useState("orange");
-
-  useEffect(() => {
-    colorFlag === true ? setCol("blue") : setCol("orange");
-  }, [colorFlag]);
+  const [colorFlag, setColorFlag] = useState(f());
 
   useEffect(() => {
     const fn = async () => {
       flag === 1
-        ? await search_movies_genre(genreId, setMoviesShows)
-        : await search_tv_genre(genreId, setMoviesShows);
+        ? await search_movies_genre(
+            genreId,
+            setMoviesShows,
+            setLastUrl,
+            lastUrl
+          )
+        : await search_tv_genre(genreId, setMoviesShows, setLastUrl, lastUrl);
     };
 
     fn();
@@ -27,20 +32,22 @@ export const Genre = ({ flag, genre, setMoviesShows }) => {
 
   return (
     <section className="genre">
-      {genre.length > 0 &&
+      {genre?.length > 0 &&
         genre.map((g) => {
           return (
             <button
-              style={{ background: col }}
-              className="button"
+              style={{ background: "orange" }}
+              className={`button ${colorFlag[g.id] ? "colored" : ""}`}
               key={g.id}
               id={g.id}
               onClick={() => {
-                setColorFlag(!colorFlag);
+                setColorFlag({ ...colorFlag, [g.id]: !colorFlag[g.id] });
                 let arr = genreId.split(g.id.toString());
                 if (arr.length !== 1) {
                   setGenreId(genreId.replaceAll(g.id.toString(), ""));
-                } else setGenreId(`${genreId},${g.id}`);
+                } else {
+                  setGenreId(`${genreId},${g.id}`);
+                }
               }}
             >
               {g.name}
@@ -50,7 +57,7 @@ export const Genre = ({ flag, genre, setMoviesShows }) => {
       <button
         className="button"
         onClick={() => {
-          setColorFlag(false);
+          setColorFlag({});
           setGenreId("");
         }}
       >

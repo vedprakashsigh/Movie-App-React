@@ -9,11 +9,19 @@ import { InfoCard } from "./InfoCard";
 import { Pagenation } from "./Pagenation";
 import { Genre } from "./Genre";
 
-export const Content = ({ flag, moviesShows, setMoviesShows }) => {
+export const Content = ({
+  flag,
+  moviesShows,
+  setMoviesShows,
+  setLastUrl,
+  lastUrl,
+}) => {
   const [genre, setGenre] = useState([]);
 
   useEffect(() => {
-    flag === 1 ? getMovies(setMoviesShows) : getTVShows(setMoviesShows);
+    flag === 1
+      ? getMovies(setMoviesShows, setLastUrl, lastUrl)
+      : getTVShows(setMoviesShows, setLastUrl, lastUrl);
   }, [flag, setMoviesShows]);
 
   useEffect(() => {
@@ -22,7 +30,13 @@ export const Content = ({ flag, moviesShows, setMoviesShows }) => {
 
   return (
     <main className="main-content">
-      <Genre genre={genre} flag={flag} setMoviesShows={setMoviesShows} />
+      <Genre
+        genre={genre}
+        flag={flag}
+        lastUrl={lastUrl}
+        setLastUrl={setLastUrl}
+        setMoviesShows={setMoviesShows}
+      />
       <section className="info-card">
         {moviesShows.length > 0 ? (
           moviesShows.map((movieShow) => {
@@ -42,7 +56,12 @@ export const Content = ({ flag, moviesShows, setMoviesShows }) => {
           <h1>Sorry, No items Found!</h1>
         )}
       </section>
-      <Pagenation />
+      <Pagenation
+        flag={flag}
+        lastUrl={lastUrl}
+        setLastUrl={setLastUrl}
+        setMoviesShows={setMoviesShows}
+      />
     </main>
   );
 };
